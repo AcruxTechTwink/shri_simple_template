@@ -27,7 +27,7 @@
         "analyze": "webpack --json stats.json",
         "validate": "statoscope validate -i stats.json --config=./statoscope.config.js",
         "predeploy": "npm run build",
-        "deploy": "gh-pages -d dist"
+        "deploy": "gh-pages -d dist -b pages"
     },
     "devDependencies": {
         "@babel/core": "^7.19.3",

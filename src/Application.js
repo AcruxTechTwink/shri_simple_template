@@ -8,7 +8,7 @@ export const Application = () => {
     return (
         <div>
             <nav>
-                <Link data-testid="link-home" to="/">Home</Link>
+                <Link data-testid="link-home" to="/">Home 1</Link>
                 <Link to="/about">About</Link>
             </nav>
             <Switch>
