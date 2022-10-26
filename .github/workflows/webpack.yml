@@ -25,4 +25,30 @@ jobs:
     - name: Build
       run: |
         npm install
+        npx babel
+        npm run lint:js
+        npm run lint:css
         npx webpack
+
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.KEY }}
+        BRANCH: pages
+        FOLDER: dist
+        CLEAN: true
