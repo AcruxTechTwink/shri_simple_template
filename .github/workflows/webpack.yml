@@ -26,5 +26,4 @@ jobs:
         npm install
         npm run lint:js
         npm run lint:css
-        npm run build
-        gh-pages -d dist -b pages
+        npm run deploy
