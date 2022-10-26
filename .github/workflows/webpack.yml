@@ -26,4 +26,6 @@ jobs:
         npm install
         npm run lint:js
         npm run lint:css
+        git config user.email "acrux_tech@mail.ru"
+        git config user.name "AcruxTech"
         npm run deploy
