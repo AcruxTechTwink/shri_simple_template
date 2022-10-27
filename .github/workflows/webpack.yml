@@ -2,10 +2,11 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [ "master" ]
+    branches: 
+      - "master"
   pull_request:
-    branches: [ "master" ]
-    types: [opened, reopened, closed]
+    branches: 
+      - "master" 
 
 jobs:
   build:
@@ -28,8 +29,14 @@ jobs:
         npm run lint:css
         npm run build
 
+    # - name: Deploy
+    #   uses: JamesIves/github-pages-deploy-action@v4
+    #   with:
+    #     folder: dist
+    #     branch: gh-pages
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: dist
-        branch: gh-pages
+      run: |
+        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
