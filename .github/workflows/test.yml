@@ -1,10 +1,8 @@
-name: NodeJS with Webpack
+name: Test
 
 on:
-  push:
-    branches: 
-      - "master"
   pull_request:
+  push:
     branches: 
       - "master" 
 
@@ -22,23 +20,14 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Build
+    - name: Tests
       run: |
         npm install
         npm run lint:js
         npm run lint:css
-        npm run build
-        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
     # - name: Deploy
     #   uses: JamesIves/github-pages-deploy-action@v4
     #   with:
     #     folder: dist
     #     branch: gh-pages
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: dist
-        branch: gh-pages
