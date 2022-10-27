@@ -28,6 +28,9 @@ jobs:
         npm run lint:js
         npm run lint:css
         npm run build
+        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
     # - name: Deploy
     #   uses: JamesIves/github-pages-deploy-action@v4
@@ -35,8 +38,7 @@ jobs:
     #     folder: dist
     #     branch: gh-pages
     - name: Deploy
-      run: |
-        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-        npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: dist
+        branch: gh-pages
